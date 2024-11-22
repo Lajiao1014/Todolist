@@ -37,7 +37,7 @@ export default function Home() {
               Add
             </button>
           </div>
-          <div>
+          <div stlye={{display:inlineBlock}}>
             {toDoItems.map((item, idx)=>{
               return <Child item={item} onTick={(completed)=>{
                 item.completed=completed
