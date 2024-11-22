@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import {useState, useRef} from 'react' 
+import Child from './toDoItem'
 
 export default function Home() {
 
