@@ -1,9 +1,11 @@
-export default function toDoItem(e){
+import React from 'react'
+
+export default function toDoItem({item, onTick, onRemove}){
     return(
         <>
-            <button>tick</button>
-            <div>{}</div>
-            <button>x</button>
+            <input type="checkbox" onClick={onTick}></input>
+            <div>{item}</div>
+            <button onClick={onRemove}>x</button>
         </>
     )
 }
