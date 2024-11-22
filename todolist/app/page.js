@@ -5,7 +5,7 @@ import {useState, useRef} from 'react'
 
 export default function Home() {
 
-  const [toDoItem, setToDoItem] = useState([])
+  const [toDoItems, setToDoItems] = useState([])
   const NewTask = useRef('')
 
   return <>
@@ -29,12 +29,21 @@ export default function Home() {
             />
             <button className="border-none outline-none px-[50px] bg-[#ff5945] text-white text-[16px] cursor-pointer rounded-[40px] h-[30px]"
               onClick={()=>{
-                setToDoItem((prev)=>{
+                setToDoItems((prev)=>{
                   return [...prev,{task:NewTask.current, completed: false}]})
               }}  
             >
               Add
             </button>
+          </div>
+          <div>
+            {toDoItems.map((item, idx)=>{
+              return <Child item={item} onTick={(completed)=>{
+                item.completed=completed
+              }} onRemove={()=>{
+                toDoItems.splice(idx, 1)
+              }}></Child>
+            })}
           </div>
         </div>
       </div>
