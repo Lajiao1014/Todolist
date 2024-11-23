@@ -9,6 +9,12 @@ export default function Home() {
   const [toDoItems, setToDoItems] = useState([])
   const NewTask = useRef('')
 
+  const removeItem = (idx) =>{
+    setToDoItems(()=>{
+      toDoItems.splice(idx, 1)
+    })
+  }
+
   return <>
     <div className="custom-gradient h-[100vh] w-full flex justify-center items-center">
       <div className="w-[400px] h-[200px] rounded-lg bg-[#ffffff] flex justify-center ">
@@ -37,12 +43,12 @@ export default function Home() {
               Add
             </button>
           </div>
-          <div stlye={{display:inlineBlock}}>
+          <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
             {toDoItems.map((item, idx)=>{
-              return <Child item={item} onTick={(completed)=>{
+              return <Child key={idx} item={item} onTick={(completed)=>{
                 item.completed=completed
-              }} onRemove={()=>{
-                toDoItems.splice(idx, 1)
+              }} onRemove={(idx)=>{
+                removeItem(idx);
               }}></Child>
             })}
           </div>
