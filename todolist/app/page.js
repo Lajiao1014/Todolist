@@ -9,15 +9,10 @@ export default function Home() {
   const [toDoItems, setToDoItems] = useState([])
   const NewTask = useRef('')
 
-  const removeItem = (idx) =>{
-    setToDoItems(()=>{
-      toDoItems.splice(idx, 1)
-    })
-  }
 
   return <>
     <div className="custom-gradient h-[100vh] w-full flex justify-center items-center">
-      <div className="w-[400px] h-[200px] rounded-lg bg-[#ffffff] flex justify-center ">
+      <div className="w-[400px] h-[300px] rounded-lg bg-[#ffffff] flex justify-center ">
         <div className="w-[350px] h-[100px] bg-[#ffffff] mt-[15px]">
           <div className="flex">
             <div className="font-bold text-2xl text-black">
@@ -45,10 +40,11 @@ export default function Home() {
           </div>
           <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
             {toDoItems.map((item, idx)=>{
-              return <Child key={idx} item={item} onTick={(completed)=>{
+              return <Child key ={idx} index={idx} item={item} onTick={(completed)=>{
                 item.completed=completed
-              }} onRemove={(idx)=>{
-                removeItem(idx);
+              }} onRemove={()=>{
+                console.log([...toDoItems.slice(0,idx),...toDoItems.slice(idx+1)])
+                setToDoItems([...toDoItems.slice(0,idx),...toDoItems.slice(idx+1)]);
               }}></Child>
             })}
           </div>
