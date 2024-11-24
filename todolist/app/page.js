@@ -40,10 +40,10 @@ export default function Home() {
           </div>
           <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
             {toDoItems.map((item, idx)=>{
-              return <Child key ={idx} index={idx} item={item} onTick={(completed)=>{
-                item.completed=completed
+              return <Child key ={idx} index={idx} item={item} onTick={()=>{
+                const tickItem = [{task:item.task, completed:!item.completed}]
+                setToDoItems([...toDoItems.slice(0,idx), ...tickItem, ...toDoItems.slice(idx+1)]);
               }} onRemove={()=>{
-                console.log([...toDoItems.slice(0,idx),...toDoItems.slice(idx+1)])
                 setToDoItems([...toDoItems.slice(0,idx),...toDoItems.slice(idx+1)]);
               }}></Child>
             })}
