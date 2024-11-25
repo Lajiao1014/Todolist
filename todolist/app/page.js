@@ -9,6 +9,14 @@ export default function Home() {
   const [toDoItems, setToDoItems] = useState([])
   const NewTask = useRef('')
 
+  const addNewTask = () => {
+    if (document.getElementById("inputBox").value!==""){
+      setToDoItems((prev) => {
+        return [...prev, { task: NewTask.current, completed: false }]
+      })
+      document.getElementById("inputBox").value="";
+    }
+  }
 
   return <>
     <div className="custom-gradient h-[100vh] w-full flex justify-center items-center">
@@ -26,15 +34,13 @@ export default function Home() {
                 NewTask.current = e.target.value
               }}
               type="text"
+              id="inputBox"
               placeholder="Add your text"
               className="flex-1 border-none outline-none bg-transparent p-[10px] text-[14px] text-black"
             />
             <button className="border-none outline-none px-[50px] bg-[#ff5945] text-white text-[16px] cursor-pointer rounded-[40px] h-[30px]"
-              onClick={() => {
-                setToDoItems((prev) => {
-                  return [...prev, { task: NewTask.current, completed: false }]
-                })
-              }}
+              onClick={addNewTask}
+              //onKeyDown={(e)=>{if(e.key==="enter"){addNewTask;}}}
             >
               Add
             </button>
